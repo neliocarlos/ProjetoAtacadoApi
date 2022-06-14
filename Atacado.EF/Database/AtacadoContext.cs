@@ -113,6 +113,8 @@ namespace Atacado.EF.Database
                 entity.Property(e => e.Situacao).HasDefaultValueSql("((1))");
             });
 
+            modelBuilder.Entity<Categoria>().ToTable("Categoria");
+
             modelBuilder.Entity<Cliente>(entity =>
             {
                 entity.Property(e => e.DataInclusao).HasDefaultValueSql("(getdate())");
@@ -382,6 +384,8 @@ namespace Atacado.EF.Database
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Subcategoria_Categoria");
             });
+
+            modelBuilder.Entity<Subcategoria>().ToTable("Subcategoria");
 
             modelBuilder.Entity<TipoFormaPagamento>(entity =>
             {
