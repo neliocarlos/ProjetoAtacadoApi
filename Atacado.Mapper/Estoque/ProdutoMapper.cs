@@ -18,7 +18,7 @@ namespace Atacado.Mapper.Estoque
             {
                 cfg.CreateMap<Produto, ProdutoPoco>();
 
-                cfg.CreateMap<SubcategoriaPoco, Subcategoria>();
+                cfg.CreateMap<ProdutoPoco, Produto>();
             });
             this.getMapper = configuration.CreateMapper();
         }
