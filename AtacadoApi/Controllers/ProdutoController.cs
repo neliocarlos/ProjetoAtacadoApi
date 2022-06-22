@@ -7,55 +7,51 @@ namespace AtacadoApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubcategoriaController : ControllerBase
+    public class ProdutoController : ControllerBase
     {
-        private SubcategoriaService servico;
+        private ProdutoService servico;
 
-        public SubcategoriaController() : base()
+        public ProdutoController() : base()
         {
-            this.servico = new SubcategoriaService();
+            this.servico = new ProdutoService();
         }
 
         [HttpGet("{skip:int}/{take:int}")]
-        public List<SubcategoriaPoco> GetAll(int skip, int take)
+        public List<ProdutoPoco> GetAll(int skip, int take)
         {
             return this.servico.Listar(skip, take);
         }
 
-        [HttpGet]
-        public List<SubcategoriaPoco> GetAll()
-        {
-            return this.servico.Listar();
-        }
-
         [HttpGet("{id:int}")]
-        public SubcategoriaPoco GetById(int id)
+        public ProdutoPoco GetById(int id)
         {
             return this.servico.Selecionar(id);
         }
 
         [HttpPost]
-        public SubcategoriaPoco Post([FromBody] SubcategoriaPoco poco)
+        public ProdutoPoco Post([FromBody] ProdutoPoco poco)
         {
             return this.servico.Criar(poco);
         }
 
         [HttpPut]
-        public SubcategoriaPoco Put([FromBody] SubcategoriaPoco poco)
+        public ProdutoPoco Put([FromBody] ProdutoPoco poco)
         {
             return this.servico.Atualizar(poco);
         }
 
         [HttpDelete]
-        public SubcategoriaPoco Delete([FromBody] SubcategoriaPoco poco)
+        public ProdutoPoco Delete([FromBody] ProdutoPoco poco)
         {
             return this.servico.Excluir(poco);
         }
 
         [HttpDelete("{id:int}")]
-        public SubcategoriaPoco Delete(int id)
+        public ProdutoPoco Delete(int id)
         {
             return this.servico.Excluir(id);
         }
     }
 }
+    
+
