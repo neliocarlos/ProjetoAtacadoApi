@@ -35,13 +35,18 @@ namespace Atacado.Dal.Auxiliar
 
         public override Banco Read(int id)
         {
-            Banco obj = this.contexto.Bancos.FirstOrDefault(ban => ban.IdBanco == id);
+            Banco obj = this.contexto.Bancos.SingleOrDefault(ban => ban.IdBanco == id);
             return obj;
         }
 
         public override List<Banco> ReadAll()
         {
             return this.contexto.Bancos.ToList();
+        }
+
+        public List<Banco> ReadAll(int skip, int take)
+        {
+            return this.contexto.Bancos.Skip(skip).Take(take).ToList();
         }
 
         public override Banco Update(Banco obj)

@@ -22,7 +22,7 @@ namespace Atacado.Dal.Estoque
 
         public override Categoria Read(int id)
         {
-            Categoria obj = this.contexto.Categorias.FirstOrDefault(cat => cat.IdCategoria == id);
+            Categoria obj = this.contexto.Categorias.SingleOrDefault(cat => cat.IdCategoria == id);
             return obj;
         }
 

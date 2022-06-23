@@ -35,13 +35,18 @@ namespace Atacado.Dal.Auxiliar
 
         public override Curso Read(int id)
         {
-            Curso obj = this.contexto.Cursos.FirstOrDefault(cso => cso.IdCurso == id);
+            Curso obj = this.contexto.Cursos.SingleOrDefault(cso => cso.IdCurso == id);
             return obj;
         }
 
         public override List<Curso> ReadAll()
         {
             return this.contexto.Cursos.ToList();
+        }
+
+        public List<Curso> ReadAll(int skip, int take)
+        {
+            return this.contexto.Cursos.Skip(skip).Take(take).ToList();
         }
 
         public override Curso Update(Curso obj)

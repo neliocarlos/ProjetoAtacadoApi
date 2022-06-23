@@ -35,13 +35,18 @@ namespace Atacado.Dal.Auxiliar
 
         public override Profissao Read(int id)
         {
-            Profissao obj = this.contexto.Profissaos.FirstOrDefault(pro => pro.IdProfissao == id);
+            Profissao obj = this.contexto.Profissaos.SingleOrDefault(pro => pro.IdProfissao == id);
             return obj;
         }
 
         public override List<Profissao> ReadAll()
         {
             return this.contexto.Profissaos.ToList();
+        }
+
+        public List<Profissao> ReadAll(int skip, int take)
+        {
+            return this.contexto.Profissaos.Skip(skip).Take(take).ToList();
         }
 
         public override Profissao Update(Profissao obj)

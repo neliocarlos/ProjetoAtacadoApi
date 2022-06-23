@@ -35,13 +35,18 @@ namespace Atacado.Dal.Auxiliar
 
         public override Idioma Read(int id)
         {
-            Idioma obj = this.contexto.Idiomas.FirstOrDefault(idi => idi.IdIdioma == id);
+            Idioma obj = this.contexto.Idiomas.SingleOrDefault(idi => idi.IdIdioma == id);
             return obj;
         }
 
         public override List<Idioma> ReadAll()
         {
             return this.contexto.Idiomas.ToList();
+        }
+
+        public List<Idioma> ReadAll(int skip, int take)
+        {
+            return this.contexto.Idiomas.Skip(skip).Take(take).ToList();
         }
 
         public override Idioma Update(Idioma obj)

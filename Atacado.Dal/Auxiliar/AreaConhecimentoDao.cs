@@ -35,7 +35,7 @@ namespace Atacado.Dal.Auxiliar
 
         public override AreaConhecimento Read(int id)
         {
-            AreaConhecimento obj = this.contexto.AreaConhecimentos.FirstOrDefault(area => area.IdAreaConhecimento == id);
+            AreaConhecimento obj = this.contexto.AreaConhecimentos.SingleOrDefault(area => area.IdAreaConhecimento == id);
             return obj;
         }
 

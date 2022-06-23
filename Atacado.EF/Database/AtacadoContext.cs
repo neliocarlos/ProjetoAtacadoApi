@@ -48,6 +48,16 @@ namespace Atacado.EF.Database
         public virtual DbSet<UnidadeFederacao> UnidadeFederacaos { get; set; } = null!;
         public virtual DbSet<VwFuncionariosAtivosInformacao> VwFuncionariosAtivosInformacaos { get; set; } = null!;
         public virtual DbSet<VwInformacaoProduto> VwInformacaoProdutos { get; set; } = null!;
+        
+
+
+        //
+        // Adicionado pelo Programador - 23/06/2022 - 16:37.
+        //
+        public virtual DbSet<TipoRebanho> TipoRebanhos { get; set; } = null!;
+
+
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -423,6 +433,28 @@ namespace Atacado.EF.Database
             {
                 entity.ToView("VW_Informacao_Produto");
             });
+
+
+
+
+
+            //
+            // Adicionado pelo Programador - 23/06/2022 - 16:40.
+            //
+            modelBuilder.Entity<TipoRebanho>(entity =>
+            { 
+                entity.Property(e => e.DataInclusao).HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Situacao).HasDefaultValueSql("((1))");    
+            });
+
+            modelBuilder.Entity<TipoRebanho>().ToTable("Tipo_Rebanho");
+            //
+            //
+            //
+
+
+
 
             OnModelCreatingPartial(modelBuilder);
         }
