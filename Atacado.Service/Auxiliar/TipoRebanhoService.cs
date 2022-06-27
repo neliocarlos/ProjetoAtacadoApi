@@ -1,7 +1,7 @@
-﻿using Atacado.Dal.Auxiliar;
-using Atacado.EF.Database;
+﻿using Atacado.EF.Database;
 using Atacado.Mapper.Auxiliar;
 using Atacado.Poco.Auxiliar;
+using Atacado.Repository.Auxiliar;
 using Atacado.Service.Ancestral;
 using System;
 using System.Collections.Generic;
@@ -11,43 +11,37 @@ using System.Threading.Tasks;
 
 namespace Atacado.Service.Auxiliar
 {
-    public class TipoRebanhoService : BaseAncestralService<TipoRebanhoPoco>
+    public class TipoRebanhoService : BaseAncestralService<TipoRebanhoPoco, TipoRebanho>
     {
         private TipoRebanhoMapper mapConfig;
-        private TipoRebanhoDao dao;
+        private TipoRebanhoRepository repositorio;
 
         public TipoRebanhoService()
         {
             this.mapConfig = new TipoRebanhoMapper();
-            this.dao = new TipoRebanhoDao();
+            this.repositorio = new TipoRebanhoRepository(new AtacadoContext());
         }
 
         public override List<TipoRebanhoPoco> Listar()
         {
-            List<TipoRebanho> listDom = this.dao.ReadAll();
+            List<TipoRebanho> listDom = this.repositorio.Read().ToList();
             return ProcessarListaDOM(listDom);
         }
 
         public List<TipoRebanhoPoco> Listar(int pular, int exibir)
         {
-            List<TipoRebanho> listDom = this.dao.ReadAll(pular, exibir);
+            List<TipoRebanho> listDom = this.repositorio.Read(pular, exibir).ToList();
             return ProcessarListaDOM(listDom);
         }
 
-        private List<TipoRebanhoPoco> ProcessarListaDOM(List<TipoRebanho> listDom)
+        protected override List<TipoRebanhoPoco> ProcessarListaDOM(List<TipoRebanho> listDom)
         {
-            List<TipoRebanhoPoco> listPoco = new List<TipoRebanhoPoco>();
-            foreach (TipoRebanho item in listDom)
-            {
-                TipoRebanhoPoco poco = this.mapConfig.Mapper.Map<TipoRebanhoPoco>(listDom);
-                listPoco.Add(poco);
-            }
-            return listPoco;
+            return listDom.Select(dom => this.mapConfig.Mapper.Map<TipoRebanhoPoco>(dom)).ToList();
         }
 
         public override TipoRebanhoPoco Selecionar(int id)
         {
-            TipoRebanho dom = this.dao.Read(id);
+            TipoRebanho dom = this.repositorio.Read(id);
             TipoRebanhoPoco poco = this.mapConfig.Mapper.Map<TipoRebanhoPoco>(dom);
             return poco;
         }
@@ -55,7 +49,7 @@ namespace Atacado.Service.Auxiliar
         public override TipoRebanhoPoco Criar(TipoRebanhoPoco obj)
         {
             TipoRebanho dom = this.mapConfig.Mapper.Map<TipoRebanho>(obj);
-            TipoRebanho criado = this.dao.Create(dom);
+            TipoRebanho criado = this.repositorio.Add(dom);
             TipoRebanhoPoco poco = this.mapConfig.Mapper.Map<TipoRebanhoPoco>(criado);
             return poco;
         }
@@ -63,14 +57,14 @@ namespace Atacado.Service.Auxiliar
         public override TipoRebanhoPoco Atualizar(TipoRebanhoPoco obj)
         {
             TipoRebanho dom = this.mapConfig.Mapper.Map<TipoRebanho>(obj);
-            TipoRebanho atualizado = this.dao.Update(dom);
+            TipoRebanho atualizado = this.repositorio.Edit(dom);
             TipoRebanhoPoco poco = this.mapConfig.Mapper.Map<TipoRebanhoPoco>(atualizado);
             return poco;
         }
 
         public override TipoRebanhoPoco Excluir(int id)
         {
-            TipoRebanho excluido = this.dao.Delete(id);
+            TipoRebanho excluido = this.repositorio.DeleteById(id);
             TipoRebanhoPoco poco = this.mapConfig.Mapper.Map<TipoRebanhoPoco>(excluido);
             return poco;
         }

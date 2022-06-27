@@ -54,7 +54,7 @@ namespace Atacado.Dal.Auxiliar
 
         public IQueryable<Rebanho> QueryBy(Expression<Func<Rebanho, bool>> predicado)
         {
-            return this.contexto.Rebanhos.Where(predicado).AsQueryable();
+            return this.contexto.Rebanhos.Where(predicado);
         }
 
         public override Rebanho Update(Rebanho obj)

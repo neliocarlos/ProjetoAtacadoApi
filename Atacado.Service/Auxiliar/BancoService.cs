@@ -1,7 +1,7 @@
-﻿using Atacado.Dal.Auxiliar;
-using Atacado.EF.Database;
+﻿using Atacado.EF.Database;
 using Atacado.Mapper.Auxiliar;
 using Atacado.Poco.Auxiliar;
+using Atacado.Repository.Auxiliar;
 using Atacado.Service.Ancestral;
 using System;
 using System.Collections.Generic;
@@ -11,43 +11,37 @@ using System.Threading.Tasks;
 
 namespace Atacado.Service.Auxiliar
 {
-    public class BancoService : BaseAncestralService<BancoPoco>
+    public class BancoService : BaseAncestralService<BancoPoco, Banco>
     {
         private BancoMapper mapConfig;
-        private BancoDao dao;
+        private BancoRepository repositorio;
 
         public BancoService()
         {
             this.mapConfig = new BancoMapper();
-            this.dao = new BancoDao();
+            this.repositorio = new BancoRepository(new AtacadoContext());
         }
 
         public override List<BancoPoco> Listar()
         {
-            List<Banco> listDom = this.dao.ReadAll();
+            List<Banco> listDom = this.repositorio.Read().ToList();
             return ProcessarListaDOM(listDom);
         }
 
         public List<BancoPoco> Listar(int pular, int exibir)
         {
-            List<Banco> listDom = this.dao.ReadAll(pular, exibir);
+            List<Banco> listDom = this.repositorio.Read(pular, exibir).ToList();
             return ProcessarListaDOM(listDom);
         }
 
-        private List<BancoPoco> ProcessarListaDOM(List<Banco> listDom)
+        protected override List<BancoPoco> ProcessarListaDOM(List<Banco> listDom)
         {
-            List<BancoPoco> listPoco = new List<BancoPoco>();
-            foreach (Banco banco in listDom)
-            {
-                BancoPoco poco = this.mapConfig.Mapper.Map<BancoPoco>(listDom);
-                listPoco.Add(poco);
-            }
-            return listPoco;
+            return listDom.Select(dom => this.mapConfig.Mapper.Map<BancoPoco>(dom)).ToList();
         }
 
         public override BancoPoco Selecionar(int id)
         {
-            Banco dom = this.dao.Read(id);
+            Banco dom = this.repositorio.Read(id);
             BancoPoco poco = this.mapConfig.Mapper.Map<BancoPoco>(dom);
             return poco;
         }
@@ -55,7 +49,7 @@ namespace Atacado.Service.Auxiliar
         public override BancoPoco Criar(BancoPoco obj)
         {
             Banco dom = this.mapConfig.Mapper.Map<Banco>(obj);
-            Banco criado = this.dao.Create(dom);
+            Banco criado = this.repositorio.Add(dom);
             BancoPoco poco = this.mapConfig.Mapper.Map<BancoPoco>(criado);
             return poco;
         }
@@ -63,14 +57,14 @@ namespace Atacado.Service.Auxiliar
         public override BancoPoco Atualizar(BancoPoco obj)
         {
             Banco dom = this.mapConfig.Mapper.Map<Banco>(obj);
-            Banco atualizado = this.dao.Update(dom);
+            Banco atualizado = this.repositorio.Edit(dom);
             BancoPoco poco = this.mapConfig.Mapper.Map<BancoPoco>(atualizado);
             return poco;
         }
 
         public override BancoPoco Excluir(int id)
         {
-            Banco excluido = this.dao.Delete(id);
+            Banco excluido = this.repositorio.DeleteById(id);
             BancoPoco poco = this.mapConfig.Mapper.Map<BancoPoco>(excluido);
             return poco;
         }

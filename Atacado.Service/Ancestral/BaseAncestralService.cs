@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Atacado.Service.Ancestral
 {
-    public abstract class BaseAncestralService<TPoco> where TPoco : class
+    public abstract class BaseAncestralService<TPoco, TDom> 
+        where TPoco : class
+        where TDom : class
     {
         public virtual List<TPoco> Listar()
         {
@@ -36,6 +38,11 @@ namespace Atacado.Service.Ancestral
         public virtual TPoco Excluir(int id)
         {
             throw new NotSupportedException("Faz ai preguiça!");
+        }
+
+        protected virtual List<TPoco> ProcessarListaDOM(List<TDom> listDom)
+        {
+            throw new NotImplementedException("Faz ai preguiça!");
         }
     }
 }
