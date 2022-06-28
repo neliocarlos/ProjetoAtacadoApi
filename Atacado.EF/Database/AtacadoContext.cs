@@ -61,6 +61,11 @@ namespace Atacado.EF.Database
         //
         public virtual DbSet<Rebanho> Rebanhos { get; set; } = null!;
 
+        //
+        //Adicionado pelo Programador - 28/06/2022 - 15:26.
+        //
+        public virtual DbSet<Funcionario> Funcionarios { get; set; } = null!;
+
 
 
 
@@ -466,6 +471,18 @@ namespace Atacado.EF.Database
             });
 
             modelBuilder.Entity<Rebanho>().ToTable("Rebanho");
+
+            //
+            // Adicionado pelo Programador - 28/06/2022 - 15:27
+            //
+            modelBuilder.Entity<Funcionario>(entity =>
+            {
+                entity.Property(e => e.DataInclusao).HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Situacao).HasDefaultValueSql("((1))");
+            });
+
+            modelBuilder.Entity<Funcionario>().ToTable("Dados_Funcionario");
 
 
 
