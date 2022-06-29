@@ -1,5 +1,5 @@
 ﻿using Atacado.EF.Database;
-using Atacado.Mapper.Auxiliar;
+using Atacado.Mapper.Ancestral;
 using Atacado.Poco.Auxiliar;
 using Atacado.Repository.Auxiliar;
 using Atacado.Service.Ancestral;
@@ -13,12 +13,11 @@ namespace Atacado.Service.Auxiliar
 {
     public class CursoService : BaseAncestralService<CursoPoco, Curso>
     {
-        private CursoMapper mapConfig;
         private CursoRepository repositorio;
 
         public CursoService()
         {
-            this.mapConfig = new CursoMapper();
+            this.mapeador = new MapeadorGenerico<CursoPoco, Curso>();
             this.repositorio = new CursoRepository(new AtacadoContext());
         }
 
@@ -36,36 +35,36 @@ namespace Atacado.Service.Auxiliar
 
         protected override List<CursoPoco> ProcessarListaDOM(List<Curso> listDom)
         {
-            return listDom.Select(dom => this.mapConfig.Mapper.Map<CursoPoco>(dom)).ToList();
+            return listDom.Select(dom => this.mapeador.Mecanismo.Map<CursoPoco>(dom)).ToList();
         }
 
         public override CursoPoco Selecionar(int id)
         {
             Curso dom = this.repositorio.Read(id);
-            CursoPoco poco = this.mapConfig.Mapper.Map<CursoPoco>(dom);
+            CursoPoco poco = this.mapeador.Mecanismo.Map<CursoPoco>(dom);
             return poco;
         }
 
         public override CursoPoco Criar(CursoPoco obj)
         {
-            Curso dom = this.mapConfig.Mapper.Map<Curso>(obj);
+            Curso dom = this.mapeador.Mecanismo.Map<Curso>(obj);
             Curso criado = this.repositorio.Add(dom);
-            CursoPoco poco = this.mapConfig.Mapper.Map<CursoPoco>(criado);
+            CursoPoco poco = this.mapeador.Mecanismo.Map<CursoPoco>(criado);
             return poco;
         }
 
         public override CursoPoco Atualizar(CursoPoco obj)
         {
-            Curso dom = this.mapConfig.Mapper.Map<Curso>(obj);
+            Curso dom = this.mapeador.Mecanismo.Map<Curso>(obj);
             Curso atualizado = this.repositorio.Edit(dom);
-            CursoPoco poco = this.mapConfig.Mapper.Map<CursoPoco>(atualizado);
+            CursoPoco poco = this.mapeador.Mecanismo.Map<CursoPoco>(atualizado);
             return poco;
         }
 
         public override CursoPoco Excluir(int id)
         {
             Curso excluido = this.repositorio.DeleteById(id);
-            CursoPoco poco = this.mapConfig.Mapper.Map<CursoPoco>(excluido);
+            CursoPoco poco = this.mapeador.Mecanismo.Map<CursoPoco>(excluido);
             return poco;
         }
 

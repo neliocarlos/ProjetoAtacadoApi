@@ -1,5 +1,5 @@
 ﻿using Atacado.EF.Database;
-using Atacado.Mapper.Auxiliar;
+using Atacado.Mapper.Ancestral;
 using Atacado.Poco.Auxiliar;
 using Atacado.Repository.Auxiliar;
 using Atacado.Service.Ancestral;
@@ -13,12 +13,11 @@ namespace Atacado.Service.Auxiliar
 {
     public class BancoService : BaseAncestralService<BancoPoco, Banco>
     {
-        private BancoMapper mapConfig;
         private BancoRepository repositorio;
 
         public BancoService()
         {
-            this.mapConfig = new BancoMapper();
+            this.mapeador = new MapeadorGenerico<BancoPoco, Banco>();
             this.repositorio = new BancoRepository(new AtacadoContext());
         }
 
@@ -36,36 +35,36 @@ namespace Atacado.Service.Auxiliar
 
         protected override List<BancoPoco> ProcessarListaDOM(List<Banco> listDom)
         {
-            return listDom.Select(dom => this.mapConfig.Mapper.Map<BancoPoco>(dom)).ToList();
+            return listDom.Select(dom => this.mapeador.Mecanismo.Map<BancoPoco>(dom)).ToList();
         }
 
         public override BancoPoco Selecionar(int id)
         {
             Banco dom = this.repositorio.Read(id);
-            BancoPoco poco = this.mapConfig.Mapper.Map<BancoPoco>(dom);
+            BancoPoco poco = this.mapeador.Mecanismo.Map<BancoPoco>(dom);
             return poco;
         }
 
         public override BancoPoco Criar(BancoPoco obj)
         {
-            Banco dom = this.mapConfig.Mapper.Map<Banco>(obj);
+            Banco dom = this.mapeador.Mecanismo.Map<Banco>(obj);
             Banco criado = this.repositorio.Add(dom);
-            BancoPoco poco = this.mapConfig.Mapper.Map<BancoPoco>(criado);
+            BancoPoco poco = this.mapeador.Mecanismo.Map<BancoPoco>(criado);
             return poco;
         }
 
         public override BancoPoco Atualizar(BancoPoco obj)
         {
-            Banco dom = this.mapConfig.Mapper.Map<Banco>(obj);
+            Banco dom = this.mapeador.Mecanismo.Map<Banco>(obj);
             Banco atualizado = this.repositorio.Edit(dom);
-            BancoPoco poco = this.mapConfig.Mapper.Map<BancoPoco>(atualizado);
+            BancoPoco poco = this.mapeador.Mecanismo.Map<BancoPoco>(atualizado);
             return poco;
         }
 
         public override BancoPoco Excluir(int id)
         {
             Banco excluido = this.repositorio.DeleteById(id);
-            BancoPoco poco = this.mapConfig.Mapper.Map<BancoPoco>(excluido);
+            BancoPoco poco = this.mapeador.Mecanismo.Map<BancoPoco>(excluido);
             return poco;
         }
 

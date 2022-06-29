@@ -1,57 +1,61 @@
-﻿using Atacado.Poco.Estoque;
-using Atacado.Service.Estoque;
+﻿using Atacado.Poco.RH;
+using Atacado.Service.RH;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AtacadoApi.Controllers
 {
-    [Route("api/estoque/[controller]")]
+    [Route("api/rh/[controller]")]
     [ApiController]
-    public class ProdutoController : ControllerBase
+    public class EmpresaController : ControllerBase
     {
-        private ProdutoService servico;
+        private EmpresaService servico;
 
-        public ProdutoController() : base()
+        public EmpresaController() : base()
         {
-            this.servico = new ProdutoService();
+            this.servico = new EmpresaService();
+        }
+
+        [HttpGet]
+        public List<EmpresaPoco> GetAll()
+        {
+            return this.servico.Listar();
         }
 
         [HttpGet("{skip:int}/{take:int}")]
-        public List<ProdutoPoco> GetAll(int skip, int take)
+        public List<EmpresaPoco> GetPage(int skip, int take)
         {
             return this.servico.Listar(skip, take);
         }
 
         [HttpGet("{id:int}")]
-        public ProdutoPoco GetById(int id)
+        public EmpresaPoco GetById(int id)
         {
             return this.servico.Selecionar(id);
         }
 
         [HttpPost]
-        public ProdutoPoco Post([FromBody] ProdutoPoco poco)
+        public EmpresaPoco Post([FromBody] EmpresaPoco poco)
         {
             return this.servico.Criar(poco);
         }
 
         [HttpPut]
-        public ProdutoPoco Put([FromBody] ProdutoPoco poco)
+        public EmpresaPoco Put([FromBody] EmpresaPoco poco)
         {
             return this.servico.Atualizar(poco);
         }
 
         [HttpDelete]
-        public ProdutoPoco Delete([FromBody] ProdutoPoco poco)
+        public EmpresaPoco Delete([FromBody] EmpresaPoco poco)
         {
             return this.servico.Excluir(poco);
         }
 
         [HttpDelete("{id:int}")]
-        public ProdutoPoco Delete(int id)
+        public EmpresaPoco Delete(int id)
         {
             return this.servico.Excluir(id);
         }
     }
 }
-    
-

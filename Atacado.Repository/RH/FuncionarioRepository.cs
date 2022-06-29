@@ -15,10 +15,15 @@ namespace Atacado.Repository.RH
 
         public override Funcionario DeleteById(int id)
         {
-            Funcionario funcionario = this.Read(id);
-            this.context.Set<Funcionario>().Remove(funcionario);
+            Funcionario del = this.Read(id);
+            this.context.Set<Funcionario>().Remove(del);
             this.context.SaveChanges();
-            return funcionario;
+            return del;
+        }
+
+        public override Funcionario Read(int id)
+        {
+            return this.context.Set<Funcionario>().Find(Convert.ToInt64(id));
         }
     }
 }

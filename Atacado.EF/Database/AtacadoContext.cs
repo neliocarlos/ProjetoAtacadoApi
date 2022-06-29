@@ -66,6 +66,10 @@ namespace Atacado.EF.Database
         //
         public virtual DbSet<Funcionario> Funcionarios { get; set; } = null!;
 
+        //
+        //Adicionado pelo Programador - 29/06/2022 - 15:58
+        //
+        public virtual DbSet<Empresa> Empresas { get; set; } = null!;
 
 
 
@@ -483,6 +487,11 @@ namespace Atacado.EF.Database
             });
 
             modelBuilder.Entity<Funcionario>().ToTable("Dados_Funcionario");
+
+            //
+            // Adicionado pelo Programador - 29/06/2022 - 15:59
+            //
+            modelBuilder.Entity<Empresa>().ToTable("EMPRESA");
 
 
 

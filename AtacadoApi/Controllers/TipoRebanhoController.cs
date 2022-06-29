@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AtacadoApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/auxiliar/[controller]")]
     [ApiController]
     public class TipoRebanhoController : ControllerBase
     {

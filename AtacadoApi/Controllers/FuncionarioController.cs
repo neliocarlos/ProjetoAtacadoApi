@@ -21,5 +21,41 @@ namespace AtacadoApi.Controllers
         {
             return this.servico.Listar(skip, take);
         }
+
+        [HttpGet("{id:int}")]
+        public FuncionarioPoco GetById(int id)
+        {
+            return this.servico.Selecionar(id);
+        }
+
+        [HttpGet("matricula/{mat:long}")]
+        public FuncionarioPoco GetPorMatricula(long mat)
+        {
+            return this.servico.SelecionarPorMatricula(mat);
+        }
+
+        [HttpPost]
+        public FuncionarioPoco Post([FromBody] FuncionarioPoco poco)
+        {
+            return this.servico.Criar(poco);
+        }
+
+        [HttpPut]
+        public FuncionarioPoco Put([FromBody] FuncionarioPoco poco)
+        {
+            return this.servico.Atualizar(poco);
+        }
+
+        [HttpDelete]
+        public FuncionarioPoco Delete([FromBody] FuncionarioPoco poco)
+        {
+            return this.servico.Excluir(poco);
+        }
+
+        [HttpDelete("{id:int}")]
+        public FuncionarioPoco Delete(int id)
+        {
+            return this.servico.Excluir(id);
+        }
     }
 }

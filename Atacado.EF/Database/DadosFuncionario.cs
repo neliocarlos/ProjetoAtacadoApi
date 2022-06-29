@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Atacado.EF.Database
 {
     [Table("Dados_Funcionario")]
-    public class Funcionario
+    public partial class Funcionario
     {
         [Key]
         [Column("ID_Funcionario")]
