@@ -16,46 +16,94 @@ namespace AtacadoApi.Controllers
             this.servico = new FuncionarioService();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="skip"></param>
+        /// <param name="take"></param>
+        /// <returns></returns>
         [HttpGet("{skip:int}/{take:int}")]
-        public List<FuncionarioPoco> GetPage(int skip, int take)
+        public ActionResult<List<FuncionarioPoco>> GetPage(int skip, int take)
         {
-            return this.servico.Listar(skip, take);
+            List<FuncionarioPoco> listaResposta = this.servico.Listar(skip, take);
+            return Ok(listaResposta);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id:int}")]
-        public FuncionarioPoco GetById(int id)
+        public ActionResult<FuncionarioPoco> GetById(int id)
         {
-            return this.servico.Selecionar(id);
+            FuncionarioPoco pocoResposta = this.servico.Selecionar(id);
+            return Ok(pocoResposta);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mat"></param>
+        /// <returns></returns>
         [HttpGet("matricula/{mat:long}")]
-        public FuncionarioPoco GetPorMatricula(long mat)
+        public ActionResult<FuncionarioPoco> GetPorMatricula(long mat)
         {
-            return this.servico.SelecionarPorMatricula(mat);
+            FuncionarioPoco pocoResposta = this.servico.SelecionarPorMatricula(mat);
+            return Ok(pocoResposta);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="poco"></param>
+        /// <returns></returns>
         [HttpPost]
-        public FuncionarioPoco Post([FromBody] FuncionarioPoco poco)
+        public ActionResult<FuncionarioPoco> Post([FromBody] FuncionarioPoco poco)
         {
-            return this.servico.Criar(poco);
+            FuncionarioPoco pocoResposta = this.servico.Criar(poco);
+            if (pocoResposta == null)
+            {
+                return BadRequest(this.servico.MensagensProcess);
+            }
+            else
+                return Ok(pocoResposta);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="poco"></param>
+        /// <returns></returns>
         [HttpPut]
-        public FuncionarioPoco Put([FromBody] FuncionarioPoco poco)
+        public ActionResult<FuncionarioPoco> Put([FromBody] FuncionarioPoco poco)
         {
-            return this.servico.Atualizar(poco);
+            FuncionarioPoco pocoResposta = this.servico.Atualizar(poco);
+            return Ok(pocoResposta);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="poco"></param>
+        /// <returns></returns>
         [HttpDelete]
-        public FuncionarioPoco Delete([FromBody] FuncionarioPoco poco)
+        public ActionResult<FuncionarioPoco> Delete([FromBody] FuncionarioPoco poco)
         {
-            return this.servico.Excluir(poco);
+            FuncionarioPoco pocoResposta = this.servico.Excluir(poco);
+            return Ok(pocoResposta);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id:int}")]
-        public FuncionarioPoco Delete(int id)
+        public ActionResult<FuncionarioPoco> Delete(int id)
         {
-            return this.servico.Excluir(id);
+            FuncionarioPoco pocoResposta = this.servico.Excluir(id);
+            return Ok(pocoResposta);
         }
     }
 }

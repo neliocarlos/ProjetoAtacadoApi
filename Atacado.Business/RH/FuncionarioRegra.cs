@@ -8,44 +8,51 @@ using System.Threading.Tasks;
 
 namespace Atacado.Business.RH
 {
-    public class FuncionarioRegra : IRule
+    /// <summary>
+    /// 
+    /// </summary>
+    public class FuncionarioRegra : RuleAncestor<FuncionarioPoco>, IRule
     {
-        private List<string> ruleMessages;
-        public List<string> RuleMessages => this.ruleMessages;
+        public FuncionarioRegra()
+        { }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="poco"></param>
+        public FuncionarioRegra(FuncionarioPoco poco) : base(poco)
+        { }
 
-        private FuncionarioPoco poco;
-
-        public FuncionarioRegra(FuncionarioPoco poco)
-        {
-            this.ruleMessages = new List<string>();
-            this.poco = poco;
-        }
-
-        public bool Process()
+        public override bool Process()
         {
             bool resultado = true;
 
-            if (this.NomeRegra() == false)
+            string mensagemProcess = string.Empty;
+
+            if (RegrasGenericas.NomeRegra(this.poco.Nome, ref mensagemProcess) == false)
             {
+                this.ruleMessages.Add(mensagemProcess);
                 resultado = false;
             }
-            //...
-            //...
-            //...
-            //aqui vão outras regras.
+
+            if (RegrasGenericas.SobrenomeRegra(this.poco.Sobrenome, ref mensagemProcess) == false)
+            {
+                this.ruleMessages.Add(mensagemProcess);
+                resultado = false;
+            }
+
+            if (RegrasGenericas.SexoRegra(this.poco.Sexo, ref mensagemProcess) == false)
+            {
+                this.ruleMessages.Add(mensagemProcess);
+                resultado = false;
+            }
+
+            if (RegrasGenericas.EmailRegra(this.poco.Email, ref mensagemProcess) == false)
+            {
+                this.ruleMessages.Add(mensagemProcess);
+                resultado = false;
+            }
 
             return resultado;
-        }
-
-        private bool NomeRegra()
-        {
-            if (string.IsNullOrEmpty(this.poco.Nome) == true)
-            {
-                this.ruleMessages.Add("Nome não pode ser vazio!");
-                return false;
-            }
-            else
-                return true;
         }
     }
 }
