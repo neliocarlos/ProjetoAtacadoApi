@@ -4,6 +4,65 @@
         <name>AtacadoApi</name>
     </assembly>
     <members>
+        <member name="T:AtacadoApi.Controllers.EmpresaController">
+            <summary>
+            Recurso Empresa.
+            </summary>
+        </member>
+        <member name="M:AtacadoApi.Controllers.EmpresaController.#ctor">
+            <summary>
+            Construtor da classe.
+            </summary>
+        </member>
+        <member name="M:AtacadoApi.Controllers.EmpresaController.GetAll">
+            <summary>
+            Realiza a busca por todos os registros.
+            </summary>
+            <returns>Coleção de dados.</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.EmpresaController.GetPage(System.Int32,System.Int32)">
+            <summary>
+            Realiza a busca por todos os registros, filtrando por onde inicia(skip) e a quantidade(take).
+            </summary>
+            <param name="skip">Onde inicia os resultados da pesquisa.</param>
+            <param name="take">Quantos registros serão retornados.</param>
+            <returns>Coleção de dados.</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.EmpresaController.GetById(System.Int32)">
+            <summary>
+            Realiza a busca pelo ID do registro desejado.
+            </summary>
+            <param name="id">Onde se informa o ID do registro.</param>
+            <returns>Registro pesquisado.</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.EmpresaController.Post(Atacado.Poco.RH.EmpresaPoco)">
+            <summary>
+            Realiza a adição de um novo registro.
+            </summary>
+            <param name="poco">Dados do novo registro.</param>
+            <returns>Novo registro.</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.EmpresaController.Put(Atacado.Poco.RH.EmpresaPoco)">
+            <summary>
+            Realiza a atualização de um registro.
+            </summary>
+            <param name="poco">Dados atualizados do registro.</param>
+            <returns>Registro atualizado</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.EmpresaController.Delete(Atacado.Poco.RH.EmpresaPoco)">
+            <summary>
+            Realiza a exclusão de um registro.
+            </summary>
+            <param name="poco">Dados do registro a ser excluído.</param>
+            <returns>Registro excluído.</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.EmpresaController.Delete(System.Int32)">
+            <summary>
+            Realiza a exclusão de um registro pelo seu ID.
+            </summary>
+            <param name="id">ID do registro.</param>
+            <returns>Registro excluído.</returns>
+        </member>
         <member name="T:AtacadoApi.Controllers.FuncionarioController">
             <summary>
             Recurso Funcionário.

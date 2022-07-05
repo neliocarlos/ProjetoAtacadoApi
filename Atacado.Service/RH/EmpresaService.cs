@@ -1,4 +1,5 @@
 ﻿using Atacado.EF.Database;
+using Atacado.Envelope.RH;
 using Atacado.Mapper.Ancestral;
 using Atacado.Poco.RH;
 using Atacado.Repository.RH;
@@ -11,66 +12,72 @@ using System.Threading.Tasks;
 
 namespace Atacado.Service.RH
 {
-    public class EmpresaService : BaseAncestralService<EmpresaPoco, Empresa>
+    public class EmpresaService : BaseEnvelopadaService<EmpresaPoco, Empresa, EmpresaEnvelopeJSON>
     {
         private EmpresaRepository repositorio;
 
         public EmpresaService() : base()
         {
-            this.mapeador = new MapeadorGenerico<EmpresaPoco, Empresa>();
+            this.mapeador = new MapeadorGenericoEnvelopado<EmpresaPoco, Empresa, EmpresaEnvelopeJSON>();
             this.repositorio = new EmpresaRepository(new AtacadoContext());
         }
 
-        public override List<EmpresaPoco> Listar()
+        public override List<EmpresaEnvelopeJSON> Listar()
         {
             List<Empresa> listDom = this.repositorio.Read().ToList();
             return ProcessarListaDOM(listDom);
         }
 
-        public List<EmpresaPoco> Listar(int pular, int exibir)
+        public List<EmpresaEnvelopeJSON> Listar(int pular, int exibir)
         {
             List<Empresa> listDom = this.repositorio.Read(pular, exibir).ToList();
             return ProcessarListaDOM(listDom);
         }
 
-        protected override List<EmpresaPoco> ProcessarListaDOM(List<Empresa> listDom)
+        protected override List<EmpresaEnvelopeJSON> ProcessarListaDOM(List<Empresa> listDom)
         {
-            return listDom.Select(dom => this.mapeador.Mecanismo.Map<EmpresaPoco>(dom)).ToList();
+            List<EmpresaEnvelopeJSON> lista = listDom.Select(dom => this.mapeador.Mecanismo.Map<EmpresaEnvelopeJSON>(dom)).ToList();
+            lista.ForEach(json => json.SetLinks());
+            return lista;
         }
 
-        public override EmpresaPoco Atualizar(EmpresaPoco obj)
+        public override EmpresaEnvelopeJSON Atualizar(EmpresaPoco obj)
         {
             Empresa antes = this.mapeador.Mecanismo.Map<Empresa>(obj);
             Empresa editado = this.repositorio.Edit(antes);
-            EmpresaPoco poco = this.mapeador.Mecanismo.Map<EmpresaPoco>(obj);
-            return poco;
+            EmpresaEnvelopeJSON json = this.mapeador.Mecanismo.Map<EmpresaEnvelopeJSON>(editado);
+            json.SetLinks();
+            return json;
         }
 
-        public override EmpresaPoco Criar(EmpresaPoco obj)
+        public override EmpresaEnvelopeJSON Criar(EmpresaPoco obj)
         {
             Empresa novo = this.mapeador.Mecanismo.Map<Empresa>(obj);
             Empresa criado = this.repositorio.Add(novo);
-            EmpresaPoco poco = this.mapeador.Mecanismo.Map<EmpresaPoco>(criado);
-            return poco;
+            EmpresaEnvelopeJSON json = this.mapeador.Mecanismo.Map<EmpresaEnvelopeJSON>(criado);
+            json.SetLinks();
+            return json;
         }
 
-        public override EmpresaPoco Excluir(int id)
+        public override EmpresaEnvelopeJSON Excluir(int id)
         {
             Empresa excluido = this.repositorio.DeleteById(id);
-            EmpresaPoco poco = this.mapeador.Mecanismo.Map<EmpresaPoco>(excluido);
-            return poco;
+            EmpresaEnvelopeJSON json = this.mapeador.Mecanismo.Map<EmpresaEnvelopeJSON>(excluido);
+            json.SetLinks();
+            return json;
         }
 
-        public override EmpresaPoco Excluir(EmpresaPoco obj)
+        public override EmpresaEnvelopeJSON Excluir(EmpresaPoco obj)
         {
             return this.Excluir(Convert.ToInt32(obj.IdEmpresa));
         }
 
-        public override EmpresaPoco Selecionar(int id)
+        public override EmpresaEnvelopeJSON Selecionar(int id)
         {
             Empresa selecionado = this.repositorio.Read(id);
-            EmpresaPoco poco = this.mapeador.Mecanismo.Map<EmpresaPoco>(selecionado);
-            return poco;
+            EmpresaEnvelopeJSON json = this.mapeador.Mecanismo.Map<EmpresaEnvelopeJSON>(selecionado);
+            json.SetLinks();
+            return json;
         }
     }
 }
