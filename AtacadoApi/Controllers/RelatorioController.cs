@@ -150,7 +150,6 @@ namespace AtacadoApi.Controllers
                             NomeSubcategoria = subs.DescricaoSubcategoria,
                             IdCategoria = cats.IdCategoria,
                             NomeCategoria = cats.DescricaoCategoria
-                            
                         };
                 return Ok(retorno);
             }

@@ -184,5 +184,36 @@
             <param name="id">Informar ID do registro.</param>
             <returns>Registro excluído.</returns>
         </member>
+        <member name="T:AtacadoApi.Controllers.ReworkRelatorioController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AtacadoApi.Controllers.ReworkRelatorioController.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AtacadoApi.Controllers.ReworkRelatorioController.GetProdutoByID(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.ReworkRelatorioController.GetSubcategoriaByID(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.ReworkRelatorioController.GetCategoriaByID(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
