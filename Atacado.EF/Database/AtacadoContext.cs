@@ -67,10 +67,15 @@ namespace Atacado.EF.Database
         public virtual DbSet<Funcionario> Funcionarios { get; set; } = null!;
 
         //
-        //Adicionado pelo Programador - 29/06/2022 - 15:58
+        //Adicionado pelo Programador - 29/06/2022 - 15:58.
         //
         public virtual DbSet<Empresa> Empresas { get; set; } = null!;
 
+        //
+        //Adicionado pelo Programador - 08/07/2022 - 14:32.
+        //
+        public virtual DbSet<Aquicultura> Aquiculturas { get; set; } = null!;
+        public virtual DbSet<TipoAquicultura> TipoAquiculturas { get; set; } = null!;
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -465,7 +470,7 @@ namespace Atacado.EF.Database
             modelBuilder.Entity<TipoRebanho>().ToTable("Tipo_Rebanho");
             
             //
-            // Adicionado pelo Programador - 24/06/2022 - 14:07
+            // Adicionado pelo Programador - 24/06/2022 - 14:07.
             //
             modelBuilder.Entity<Rebanho>(entity =>
             {
@@ -477,7 +482,7 @@ namespace Atacado.EF.Database
             modelBuilder.Entity<Rebanho>().ToTable("Rebanho");
 
             //
-            // Adicionado pelo Programador - 28/06/2022 - 15:27
+            // Adicionado pelo Programador - 28/06/2022 - 15:27.
             //
             modelBuilder.Entity<Funcionario>(entity =>
             {
@@ -489,9 +494,32 @@ namespace Atacado.EF.Database
             modelBuilder.Entity<Funcionario>().ToTable("Dados_Funcionario");
 
             //
-            // Adicionado pelo Programador - 29/06/2022 - 15:59
+            // Adicionado pelo Programador - 29/06/2022 - 15:59.
             //
             modelBuilder.Entity<Empresa>().ToTable("EMPRESA");
+
+            //
+            //Adicionado pelo Programador - 08/07/2022 - 14:34.
+            //
+            modelBuilder.Entity<Aquicultura>(entity =>
+            {
+                entity.Property(e => e.DataInclusao).HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Situacao).HasDefaultValueSql("((1))");
+            });
+
+            modelBuilder.Entity<Aquicultura>().ToTable("Aquicultura");
+
+
+
+            modelBuilder.Entity<TipoAquicultura>(entity =>
+            {
+                entity.Property(e => e.DataInclusao).HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Situacao).HasDefaultValueSql("((1))");
+            });
+
+            modelBuilder.Entity<TipoAquicultura>().ToTable("Tipo_Aquicultura");
 
 
 

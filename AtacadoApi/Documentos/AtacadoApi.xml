@@ -4,6 +4,67 @@
         <name>AtacadoApi</name>
     </assembly>
     <members>
+        <member name="T:AtacadoApi.Controllers.AquiculturaController">
+            <summary>
+            Recurso Aquicultura.
+            </summary>
+        </member>
+        <member name="M:AtacadoApi.Controllers.AquiculturaController.#ctor">
+            <summary>
+            Construtor da classe.
+            </summary>
+        </member>
+        <member name="M:AtacadoApi.Controllers.AquiculturaController.GetList(System.Int32,System.Int32)">
+            <summary>
+            Realiza a busca por todos os registros, filtrando por onde iniciar(skip), e a quantidade desejada(take).
+            </summary>
+            <param name="skip">Onde inicia os resultados.</param>
+            <param name="take">Quantos registros serão retornados.</param>
+            <returns>Coleção de dados.</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.AquiculturaController.GetById(System.Int32)">
+            <summary>
+            Realiza a busca pelo ID do registro desejado.
+            </summary>
+            <param name="id">Informe o ID desejado.</param>
+            <returns>Registro.</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.AquiculturaController.GetPorAnoIdMun(System.Int32,System.Int32)">
+            <summary>
+            Realiza uma busca por todos os registros, filtrando pelo ano(ano) e pelo ID do município(idMun).
+            </summary>
+            <param name="ano">Ano desejado.</param>
+            <param name="idMun">ID do município desejado.</param>
+            <returns>Coleção de dados.</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.AquiculturaController.Post(Atacado.Poco.Auxiliar.AquiculturaPoco)">
+            <summary>
+            Realiza a criação de um novo registro.
+            </summary>
+            <param name="poco">Dados do novo registro.</param>
+            <returns>Novo registro.</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.AquiculturaController.Put(Atacado.Poco.Auxiliar.AquiculturaPoco)">
+            <summary>
+            Atualiza os dados de um registro.
+            </summary>
+            <param name="poco">Registro a ser atualizado.</param>
+            <returns>Registro atualizado.</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.AquiculturaController.Delete(Atacado.Poco.Auxiliar.AquiculturaPoco)">
+            <summary>
+            Exclui determinado registro.
+            </summary>
+            <param name="poco">Registro a ser excluído.</param>
+            <returns>Registro excluído.</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.AquiculturaController.DeleteById(System.Int32)">
+            <summary>
+            Exclui determinado registro, filtrado por sua ID. 
+            </summary>
+            <param name="id">Informar ID do registro.</param>
+            <returns>Registro excluído.</returns>
+        </member>
         <member name="T:AtacadoApi.Controllers.EmpresaController">
             <summary>
             Recurso Empresa.
@@ -184,6 +245,33 @@
             <param name="id">Informar ID do registro.</param>
             <returns>Registro excluído.</returns>
         </member>
+        <member name="T:AtacadoApi.Controllers.RelatorioAquiculturaController">
+            <summary>
+            Recurso Relatório Aquicultura.
+            </summary>
+        </member>
+        <member name="M:AtacadoApi.Controllers.RelatorioAquiculturaController.#ctor">
+            <summary>
+            Construtor da base.
+            </summary>
+        </member>
+        <member name="M:AtacadoApi.Controllers.RelatorioAquiculturaController.GetPorIdMunAno(System.Int32,System.Int32)">
+            <summary>
+            Relatório de busca, filtrando por produção não nula, ID do município(id) e ano(ano)
+            </summary>
+            <param name="id">ID do município desejado.</param>
+            <param name="ano">Ano desejado.</param>
+            <returns>Lista de registros.</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.RelatorioAquiculturaController.GetPorIdMunIdTipoAno(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Relatório de busca, filtrando por ID de município(idMun), ID do tipo de aquicultura(idTipo) e ano(ano).
+            </summary>
+            <param name="idMun">ID do município desejado.</param>
+            <param name="idTipo">ID do tipo de aquicultura desejada.</param>
+            <param name="ano">Ano desejado.</param>
+            <returns>Lista de registros.</returns>
+        </member>
         <member name="T:AtacadoApi.Controllers.ReworkRelatorioController">
             <summary>
             
@@ -214,6 +302,59 @@
             </summary>
             <param name="id"></param>
             <returns></returns>
+        </member>
+        <member name="T:AtacadoApi.Controllers.TipoAquiculturaController">
+            <summary>
+            Recurso TipoTipoAquicultura.
+            </summary>
+        </member>
+        <member name="M:AtacadoApi.Controllers.TipoAquiculturaController.#ctor">
+            <summary>
+            Construtor da classe.
+            </summary>
+        </member>
+        <member name="M:AtacadoApi.Controllers.TipoAquiculturaController.GetList(System.Int32,System.Int32)">
+            <summary>
+            Realiza a busca por todos os registros, filtrando por onde iniciar(skip), e a quantidade desejada(take).
+            </summary>
+            <param name="skip">Onde inicia os resultados.</param>
+            <param name="take">Quantos registros serão retornados.</param>
+            <returns>Coleção de dados.</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.TipoAquiculturaController.GetById(System.Int32)">
+            <summary>
+            Realiza a busca pelo ID do registro desejado.
+            </summary>
+            <param name="id">Informe o ID desejado.</param>
+            <returns>Registro.</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.TipoAquiculturaController.Post(Atacado.Poco.Auxiliar.TipoAquiculturaPoco)">
+            <summary>
+            Realiza a criação de um novo registro.
+            </summary>
+            <param name="poco">Dados do novo registro.</param>
+            <returns>Novo registro.</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.TipoAquiculturaController.Put(Atacado.Poco.Auxiliar.TipoAquiculturaPoco)">
+            <summary>
+            Atualiza os dados de um registro.
+            </summary>
+            <param name="poco">Registro a ser atualizado.</param>
+            <returns>Registro atualizado.</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.TipoAquiculturaController.Delete(Atacado.Poco.Auxiliar.TipoAquiculturaPoco)">
+            <summary>
+            Exclui determinado registro.
+            </summary>
+            <param name="poco">Registro a ser excluído.</param>
+            <returns>Registro excluído.</returns>
+        </member>
+        <member name="M:AtacadoApi.Controllers.TipoAquiculturaController.DeleteById(System.Int32)">
+            <summary>
+            Exclui determinado registro, filtrado por sua ID. 
+            </summary>
+            <param name="id">Informar ID do registro.</param>
+            <returns>Registro excluído.</returns>
         </member>
     </members>
 </doc>
