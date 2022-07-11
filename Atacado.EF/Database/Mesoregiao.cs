@@ -32,7 +32,7 @@ namespace Atacado.EF.Database
         [Column(TypeName = "datetime")]
         public DateTime? DataExclusao { get; set; }
 
-        public virtual UnidadeFederacao SiglaUfNavigation { get; set; } = null!;
+        public virtual UnidadesFederacao SiglaUfNavigation { get; set; } = null!;
         [InverseProperty("IdMesoregiaoNavigation")]
         public virtual ICollection<Municipio> Municipios { get; set; }
     }

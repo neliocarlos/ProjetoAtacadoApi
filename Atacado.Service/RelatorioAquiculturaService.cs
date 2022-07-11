@@ -35,10 +35,10 @@ namespace Atacado.Service
                     ValorProducao = aqc.ValorProducao,
                     ProporcaoValorProducao = aqc.ProporcaoValorProducao,
                     Moeda = aqc.Moeda,
-                    NomeTipoAquicultura = taqc.NomeTipoAquicultura,
+                    NomeTipoAquicultura = taqc.DescricaoTipoAquicultura,
                     NomeMunicipio = mun.NomeMunicipio,
                     SiglaUf = mun.SiglaUf,
-                    DescricaoUnidadeFederacao = uf.DescricaoUnidadeFederacao
+                    DescricaoUnidadeFederacao = uf.DescricaoUf
                 }).ToList();
             return lista;
         }
@@ -61,10 +61,10 @@ namespace Atacado.Service
                      ValorProducao = aqc.ValorProducao,
                      ProporcaoValorProducao = aqc.ProporcaoValorProducao,
                      Moeda = aqc.Moeda,
-                     NomeTipoAquicultura = taqc.NomeTipoAquicultura,
+                     NomeTipoAquicultura = taqc.DescricaoTipoAquicultura,
                      NomeMunicipio = mun.NomeMunicipio,
                      SiglaUf = mun.SiglaUf,
-                     DescricaoUnidadeFederacao = uf.DescricaoUnidadeFederacao
+                     DescricaoUnidadeFederacao = uf.DescricaoUf
                  }).ToList();
             return lista;
         }

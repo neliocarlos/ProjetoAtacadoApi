@@ -6,33 +6,33 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Atacado.EF.Database
 {
-    [Table("Unidade_Federacao")]
-    [Index("SiglaUf", Name = "AK_Unidade_Federacao", IsUnique = true)]
-    public partial class UnidadeFederacao
+    [Table("Unidades_Federacao")]
+    [Index("SiglaUf", Name = "AK_UF", IsUnique = true)]
+    public partial class UnidadesFederacao
     {
-        public UnidadeFederacao()
+        public UnidadesFederacao()
         {
             Distritos = new HashSet<Distrito>();
             Mesoregiaos = new HashSet<Mesoregiao>();
             Microregiaos = new HashSet<Microregiao>();
-            MunicipioIdUnidadeFederacaoNavigations = new HashSet<Municipio>();
-            MunicipioSiglaUfNavigations = new HashSet<Municipio>();
+            Municipios = new HashSet<Municipio>();
             SubDistritos = new HashSet<SubDistrito>();
         }
 
         [Key]
-        [Column("ID_Unidade_Federacao")]
-        public int IdUnidadeFederacao { get; set; }
-        [Column("Descricao_Unidade_Federacao")]
+        [Column("ID_UF")]
+        public int IdUf { get; set; }
+        [Column("Descricao_UF")]
         [Unicode(false)]
-        public string DescricaoUnidadeFederacao { get; set; } = null!;
-        [Column("SiglaUF")]
+        public string DescricaoUf { get; set; } = null!;
+        [Column("Sigla_UF")]
         [StringLength(2)]
         [Unicode(false)]
         public string SiglaUf { get; set; } = null!;
         [Column("Regiao_Brasil")]
+        [StringLength(20)]
         [Unicode(false)]
-        public string RegiaoBrasil { get; set; } = null!;
+        public string? RegiaoBrasil { get; set; }
         public bool? Situacao { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? DataInclusao { get; set; }
@@ -44,9 +44,8 @@ namespace Atacado.EF.Database
         public virtual ICollection<Distrito> Distritos { get; set; }
         public virtual ICollection<Mesoregiao> Mesoregiaos { get; set; }
         public virtual ICollection<Microregiao> Microregiaos { get; set; }
-        [InverseProperty("IdUnidadeFederacaoNavigation")]
-        public virtual ICollection<Municipio> MunicipioIdUnidadeFederacaoNavigations { get; set; }
-        public virtual ICollection<Municipio> MunicipioSiglaUfNavigations { get; set; }
+        [InverseProperty("IdUfNavigation")]
+        public virtual ICollection<Municipio> Municipios { get; set; }
         public virtual ICollection<SubDistrito> SubDistritos { get; set; }
     }
 }

@@ -45,7 +45,7 @@ namespace Atacado.EF.Database
         public virtual DbSet<Subcategoria> Subcategorias { get; set; } = null!;
         public virtual DbSet<TipoFormaPagamento> TipoFormaPagamentos { get; set; } = null!;
         public virtual DbSet<TipoLogradouro> TipoLogradouros { get; set; } = null!;
-        public virtual DbSet<UnidadeFederacao> UnidadeFederacaos { get; set; } = null!;
+        public virtual DbSet<UnidadesFederacao> UnidadeFederacaos { get; set; } = null!;
         public virtual DbSet<VwFuncionariosAtivosInformacao> VwFuncionariosAtivosInformacaos { get; set; } = null!;
         public virtual DbSet<VwInformacaoProduto> VwInformacaoProdutos { get; set; } = null!;
         
@@ -273,36 +273,19 @@ namespace Atacado.EF.Database
 
             modelBuilder.Entity<Municipio>(entity =>
             {
+                entity.Property(e => e.IdMunicipio).ValueGeneratedNever();
+
                 entity.Property(e => e.DataInclusao).HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.SiglaUf).IsFixedLength();
 
                 entity.Property(e => e.Situacao).HasDefaultValueSql("((1))");
 
-                entity.HasOne(d => d.IdMesoregiaoNavigation)
+                entity.HasOne(d => d.IdUfNavigation)
                     .WithMany(p => p.Municipios)
-                    .HasForeignKey(d => d.IdMesoregiao)
+                    .HasForeignKey(d => d.IdUf)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Mesoregiao_Municipio");
-
-                entity.HasOne(d => d.IdMicroregiaoNavigation)
-                    .WithMany(p => p.Municipios)
-                    .HasForeignKey(d => d.IdMicroregiao)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Microregiao_Municipio");
-
-                entity.HasOne(d => d.IdUnidadeFederacaoNavigation)
-                    .WithMany(p => p.MunicipioIdUnidadeFederacaoNavigations)
-                    .HasForeignKey(d => d.IdUnidadeFederacao)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Unidade_Federacao_Municipio");
-
-                entity.HasOne(d => d.SiglaUfNavigation)
-                    .WithMany(p => p.MunicipioSiglaUfNavigations)
-                    .HasPrincipalKey(p => p.SiglaUf)
-                    .HasForeignKey(d => d.SiglaUf)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SiglaUF_Municipio");
+                    .HasConstraintName("FK_Municipio_UF");
             });
 
             modelBuilder.Entity<Pai>(entity =>
@@ -432,7 +415,7 @@ namespace Atacado.EF.Database
                 entity.Property(e => e.Situacao).HasDefaultValueSql("((1))");
             });
 
-            modelBuilder.Entity<UnidadeFederacao>(entity =>
+            modelBuilder.Entity<UnidadesFederacao>(entity =>
             {
                 entity.Property(e => e.DataInclusao).HasDefaultValueSql("(getdate())");
 
@@ -501,12 +484,6 @@ namespace Atacado.EF.Database
             //
             //Adicionado pelo Programador - 08/07/2022 - 14:34.
             //
-            modelBuilder.Entity<Aquicultura>(entity =>
-            {
-                entity.Property(e => e.DataInclusao).HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.Situacao).HasDefaultValueSql("((1))");
-            });
 
             modelBuilder.Entity<Aquicultura>().ToTable("Aquicultura");
 
@@ -514,8 +491,6 @@ namespace Atacado.EF.Database
 
             modelBuilder.Entity<TipoAquicultura>(entity =>
             {
-                entity.Property(e => e.DataInclusao).HasDefaultValueSql("(getdate())");
-
                 entity.Property(e => e.Situacao).HasDefaultValueSql("((1))");
             });
 

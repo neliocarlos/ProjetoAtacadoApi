@@ -12,30 +12,31 @@ namespace Atacado.EF.Database
         [Key]
         [Column("ID_Municipio")]
         public int IdMunicipio { get; set; }
-        [Column("Codigo_Ibge_6")]
-        public long CodigoIbge6 { get; set; }
-        [Column("Codigo_Ibge_7")]
-        public long CodigoIbge7 { get; set; }
         [Column("Nome_Municipio")]
         [Unicode(false)]
         public string NomeMunicipio { get; set; } = null!;
+        [Column("ID_UF")]
+        public int IdUf { get; set; }
+        [Column("Sigla_UF")]
+        [StringLength(2)]
+        [Unicode(false)]
+        public string SiglaUf { get; set; } = null!;
         [Column("ID_Mesoregiao")]
         public int IdMesoregiao { get; set; }
         [Column("ID_Microregiao")]
         public int IdMicroregiao { get; set; }
-        [Column("ID_Unidade_Federacao")]
-        public int IdUnidadeFederacao { get; set; }
-        [Column("SiglaUF")]
-        [StringLength(2)]
-        [Unicode(false)]
-        public string SiglaUf { get; set; } = null!;
+        [Column("Codigo_IBGE_6")]
+        public int CodigoIbge6 { get; set; }
+        [Column("Codigo_IBGE_7")]
+        public int CodigoIbge7 { get; set; }
         [Column("Populacao_Municipio")]
         public long? PopulacaoMunicipio { get; set; }
         [Column("Porte_Municipio")]
+        [StringLength(50)]
         [Unicode(false)]
-        public string PorteMunicipio { get; set; } = null!;
-        [Column("Cep_Municipio")]
-        public int? CepMunicipio { get; set; }
+        public string? PorteMunicipio { get; set; }
+        [Column("CEP_Municipio")]
+        public long? CepMunicipio { get; set; }
         public bool? Situacao { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? DataInclusao { get; set; }
@@ -44,15 +45,8 @@ namespace Atacado.EF.Database
         [Column(TypeName = "datetime")]
         public DateTime? DataExclusao { get; set; }
 
-        [ForeignKey("IdMesoregiao")]
+        [ForeignKey("IdUf")]
         [InverseProperty("Municipios")]
-        public virtual Mesoregiao IdMesoregiaoNavigation { get; set; } = null!;
-        [ForeignKey("IdMicroregiao")]
-        [InverseProperty("Municipios")]
-        public virtual Microregiao IdMicroregiaoNavigation { get; set; } = null!;
-        [ForeignKey("IdUnidadeFederacao")]
-        [InverseProperty("MunicipioIdUnidadeFederacaoNavigations")]
-        public virtual UnidadeFederacao IdUnidadeFederacaoNavigation { get; set; } = null!;
-        public virtual UnidadeFederacao SiglaUfNavigation { get; set; } = null!;
+        public virtual UnidadesFederacao IdUfNavigation { get; set; } = null!;
     }
 }
