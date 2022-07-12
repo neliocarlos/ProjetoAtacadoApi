@@ -9,7 +9,7 @@
             Recurso Aquicultura.
             </summary>
         </member>
-        <member name="M:AtacadoApi.Controllers.AquiculturaController.#ctor">
+        <member name="M:AtacadoApi.Controllers.AquiculturaController.#ctor(Atacado.EF.Database.AtacadoContext)">
             <summary>
             Construtor da classe.
             </summary>
@@ -70,7 +70,7 @@
             Recurso Empresa.
             </summary>
         </member>
-        <member name="M:AtacadoApi.Controllers.EmpresaController.#ctor">
+        <member name="M:AtacadoApi.Controllers.EmpresaController.#ctor(Atacado.EF.Database.AtacadoContext)">
             <summary>
             Construtor da classe.
             </summary>
@@ -129,7 +129,7 @@
             Recurso Funcionário.
             </summary>
         </member>
-        <member name="M:AtacadoApi.Controllers.FuncionarioController.#ctor">
+        <member name="M:AtacadoApi.Controllers.FuncionarioController.#ctor(Atacado.EF.Database.AtacadoContext)">
             <summary>
             Construtor da classe.
             </summary>
@@ -189,7 +189,7 @@
             Recurso Rebanho.
             </summary>
         </member>
-        <member name="M:AtacadoApi.Controllers.RebanhoController.#ctor">
+        <member name="M:AtacadoApi.Controllers.RebanhoController.#ctor(Atacado.EF.Database.AtacadoContext)">
             <summary>
             Construtor da classe.
             </summary>
@@ -308,7 +308,7 @@
             Recurso TipoTipoAquicultura.
             </summary>
         </member>
-        <member name="M:AtacadoApi.Controllers.TipoAquiculturaController.#ctor">
+        <member name="M:AtacadoApi.Controllers.TipoAquiculturaController.#ctor(Atacado.EF.Database.AtacadoContext)">
             <summary>
             Construtor da classe.
             </summary>

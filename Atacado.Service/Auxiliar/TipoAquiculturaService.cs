@@ -22,6 +22,12 @@ namespace Atacado.Service.Auxiliar
             this.repositorio = new TipoAquiculturaRepository(new AtacadoContext());
         }
 
+        public TipoAquiculturaService(AtacadoContext contexto) : base()
+        {
+            this.mapeador = new MapeadorGenericoEnvelopado<TipoAquiculturaPoco, TipoAquicultura, TipoAquiculturaEnvelopeJSON>();
+            this.repositorio = new TipoAquiculturaRepository(contexto);
+        }
+
         public override List<TipoAquiculturaEnvelopeJSON> Listar()
         {
             List<TipoAquicultura> lista = this.repositorio.Read().ToList();

@@ -1,4 +1,5 @@
-﻿using Atacado.Envelope.Auxiliar;
+﻿using Atacado.EF.Database;
+using Atacado.Envelope.Auxiliar;
 using Atacado.Poco.Auxiliar;
 using Atacado.Service.Auxiliar;
 using Microsoft.AspNetCore.Http;
@@ -18,9 +19,9 @@ namespace AtacadoApi.Controllers
         /// <summary>
         /// Construtor da classe.
         /// </summary>
-        public AquiculturaController() : base()
+        public AquiculturaController(AtacadoContext contexto) : base()
         {
-            this.servico = new AquiculturaService();
+            this.servico = new AquiculturaService(contexto);
         }
 
         /// <summary>

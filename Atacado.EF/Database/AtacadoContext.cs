@@ -82,8 +82,7 @@ namespace Atacado.EF.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=(local);Database=Atacado202204;User Id=sa;Password=senha123");
+                //optionsBuilder.UseSqlServer("Server=psgs0071.psg.local;Database=Academia202204;User Id=academia;Password=@cadem1@555");
             }
         }
 
@@ -246,13 +245,7 @@ namespace Atacado.EF.Database
                 entity.Property(e => e.SiglaUf).IsFixedLength();
 
                 entity.Property(e => e.Situacao).HasDefaultValueSql("((1))");
-
-                entity.HasOne(d => d.SiglaUfNavigation)
-                    .WithMany(p => p.Mesoregiaos)
-                    .HasPrincipalKey(p => p.SiglaUf)
-                    .HasForeignKey(d => d.SiglaUf)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SiglaUF_Mesoregiao");
+                
             });
 
             modelBuilder.Entity<Microregiao>(entity =>
@@ -263,12 +256,6 @@ namespace Atacado.EF.Database
 
                 entity.Property(e => e.Situacao).HasDefaultValueSql("((1))");
 
-                entity.HasOne(d => d.SiglaUfNavigation)
-                    .WithMany(p => p.Microregiaos)
-                    .HasPrincipalKey(p => p.SiglaUf)
-                    .HasForeignKey(d => d.SiglaUf)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SiglaUF_Microregiao");
             });
 
             modelBuilder.Entity<Municipio>(entity =>
